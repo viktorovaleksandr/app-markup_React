@@ -9,7 +9,7 @@ export function SectionHeader () {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li className="uk-active">
-              <a href="Posts-grid">Posts</a>
+              <a href="Posts">Posts</a>
             </li>
             <li>
               <a href="Albums">Albums</a>

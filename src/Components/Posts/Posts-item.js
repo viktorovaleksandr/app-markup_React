@@ -2,7 +2,7 @@ export function PostsItem({title, body}) {
    return(
       <div>
       <a
-        href="/"
+        href="Post"
         className="uk-card uk-card-body uk-card-default uk-margin-medium-bottom uk-child-width-1-2@s uk-grid-collapse uk-margin"
         uk-grid="true">
         <div className="uk-card-media-left uk-cover-container">

@@ -9,6 +9,7 @@ export function SectionFilters() {
     getSearchPosts(inputValue) ;
  },[inputValue]);
 
+
    return (
       <div className="uk-margin-medium-bottom uk-flex">
             <form className="uk-search uk-search-default uk-width-medium uk-margin-remove uk-margin-right">
@@ -33,11 +34,11 @@ export function SectionFilters() {
               <option value="24">24</option>
             </select>
             <div className="uk-button-group uk-margin-left">
-              <button className="uk-button uk-button-default uk-active">
-                <span uk-icon="icon:  grid"></span>
+              <button className="uk-button uk-button-default">
+              <a href="Posts-grid" uk-icon="icon:  grid"></a>
               </button>
               <button className="uk-button uk-button-default">
-                <span uk-icon="icon:  list"></span>
+                <a href="/" uk-icon="icon:  list"></a>
               </button>
          </div>
       </div>
