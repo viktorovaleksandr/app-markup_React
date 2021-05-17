@@ -3,7 +3,7 @@ import { usePosts } from "../../PostsContext";
 
 export function SectionFooter() {
   const { totalPages, navigate, currentPage, handleLimitPosts } = usePosts();
-
+ 
   const pageNumbers = []
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -14,10 +14,8 @@ export function SectionFooter() {
     <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
      onClick={ handleLimitPosts }>
       Load more{" "}
-      <div
-        className="uk-margin-small-left"
-        uk-spinner="ratio: 0.6"
-      ></div>
+      <div className="uk-margin-small-left"
+        uk-spinner="ratio: 0.6"></div>
     </button>
     </div>
       <ul className="uk-pagination uk-flex-center uk-flex-middle" uk-margin="true">

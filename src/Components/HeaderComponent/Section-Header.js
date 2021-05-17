@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function SectionHeader () {
-  const { favorites, deletePost } = usePosts();
+  const { favorites, deleteFavoritePost } = usePosts();
 
    return(
       <nav className="uk-navbar uk-navbar-container" uk-navbar="true">
@@ -40,7 +40,7 @@ export function SectionHeader () {
                           <td>Title {post.id}: {post.title}</td>
                             <td className="uk-text-right">
                             <button className="uk-button" type="button" uk-icon="icon: close;"
-                            onClick={() => deletePost(post.id)}
+                            onClick={() => deleteFavoritePost(post.id)}
                             ></button>
                           </td>
                         </tr>)

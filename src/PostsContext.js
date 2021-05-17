@@ -23,7 +23,7 @@ import fetcher from "./utils/fetcher";
    setfavorite(favorites => [newFavorites,...favorites]);
   };
 
-  const deletePost = (id) => {
+  const deleteFavoritePost = (id) => {
     setfavorite(favorites => favorites.filter(post => post.id !== id));
   }
 
@@ -53,7 +53,7 @@ import fetcher from "./utils/fetcher";
     handleLimitPosts,
     getIdFavoritePost,
     favorites,
-    deletePost
+    deleteFavoritePost
   }
 
    return (

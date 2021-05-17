@@ -4,7 +4,7 @@ const fetcher = async (pathname, options = {}) => {
   }
 
   try {
-    const responsse = await fetch(`${process.env.REACT_APP_API_URL}${pathname}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${pathname}`, {
      method: "GET",
      headers: {
        Accept: "application/json",
@@ -12,7 +12,8 @@ const fetcher = async (pathname, options = {}) => {
      },
      ...options
    });
-  return await responsse.json();
+
+  return await response.json();
 
   } catch (error) {
     throw error;
