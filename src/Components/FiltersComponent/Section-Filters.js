@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFilters() {
   const { getSortPosts, getSearchPosts, handleLimitPostsPage } = usePosts();
   const [inputValue, setInputValue] = useState('');
-  
-  useEffect(() => {
-    getSearchPosts(inputValue) ;
- },[inputValue]);
 
+  const debounced = useDebouncedCallback(
+    (inputValue) => {
+      setInputValue(inputValue);
+      getSearchPosts(inputValue);
+    },500);
 
    return (
       <div className="uk-margin-medium-bottom uk-flex">
@@ -20,7 +22,8 @@ export function SectionFilters() {
               ></span>
               <input className="uk-search-input" type="search" placeholder="Search..."
                 value={inputValue}
-               onChange={(e) => setInputValue(e.target.value)}/>
+               onChange={(e) => debounced(e.target.value)}
+               />
             </form>
             <select className="uk-select uk-width-small uk-margin-auto-left"
             onChange={(e)=> getSortPosts(e.target.value)}>

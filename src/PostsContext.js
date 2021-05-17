@@ -19,7 +19,9 @@ import fetcher from "./utils/fetcher";
   const navigate = (value) => setCurrentPage(value);
 
   const getIdFavoritePost = (id) => {
-   const newFavorites = posts.filter(function(post){ return post.id == id })[0];
+   const newFavorites = posts.filter(function(post) { 
+     return post.id == id 
+    })[0];
    setfavorite(favorites => [newFavorites,...favorites]);
   };
 
@@ -28,9 +30,10 @@ import fetcher from "./utils/fetcher";
   }
 
   useEffect(() => {
-      fetcher("/posts").then((data) => setPosts(data));
+    fetcher("/posts").then((data) => setPosts(data));
   },[]);
-   
+ 
+  
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
     .then((data) => setPosts(data));
