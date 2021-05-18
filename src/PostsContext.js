@@ -17,7 +17,6 @@ import fetcher from "./utils/fetcher";
   const currentPosts = posts.slice(firstPost, lastPost);
   const handleLimitPostsPage = (value) => setPostsLimitPage(value);
   const handleLimitPosts = () => {setPostsLimitPage(postsLimitPage+6)};
-  const navigate = (value) => setCurrentPage(value);
 
   const getIdFavoritePost = (id) => {
    const newFavorites = posts.filter(function(post) { 
@@ -35,6 +34,11 @@ import fetcher from "./utils/fetcher";
     getTotalPosts().then((tolal) => setTotalPosts(Number(tolal)));
   },[]);
 
+  const getPaginatePage = (value) => {
+    return fetcher(`/posts?_limit=6&_page=${value}`)
+    .then((page) => setPosts(page.data));
+  };
+
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
     .then((posts) => setPosts(posts));
@@ -49,7 +53,7 @@ import fetcher from "./utils/fetcher";
     currentPosts,
     postsLimitPage,
     totalPages,
-    navigate,
+    getPaginatePage,
     currentPage,
     getSortPosts,
     getSearchPosts,
