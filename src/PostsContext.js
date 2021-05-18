@@ -5,14 +5,15 @@ const PostsContext = createContext(null);
 
  const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  // const [totalPosts, setTotalPosts] = useState(0);
+  const [totalPosts, setTotalPosts] = useState(0);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsLimitPage, setPostsLimitPage] = useState(6);
   const [favorites, setfavorite] = useState([]);
 
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
-  const totalPages =  Math.ceil(posts.length / postsLimitPage);
+  const totalPages =  Math.ceil(totalPosts / postsLimitPage);
   const navigate = (value) => setCurrentPage(value);
   
   const currentPosts = posts.slice(firstPost, lastPost);
@@ -31,7 +32,8 @@ const PostsContext = createContext(null);
   }
 
   useEffect(() => {
-    getPosts().then((posts) => setPosts(posts));
+    getPosts().then((posts) => setPosts(posts.data));
+    getTotalPosts().then((total)=> setTotalPosts(Number(total)))
   },[]);
 
   // const getPaginatePage = (value) => {
@@ -44,12 +46,12 @@ const PostsContext = createContext(null);
 
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
-    .then((posts) => setPosts(posts));
+    .then((posts) => setPosts(posts.data));
   }
  
   const getSortPosts = (value) => {
     return fetcher(`/posts?_sort=id&_order=${value}`)
-    .then((posts) => setPosts(posts));
+    .then((posts) => setPosts(posts.data));
   }
 
   const value = {
