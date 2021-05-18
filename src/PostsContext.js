@@ -6,7 +6,6 @@ const PostsContext = createContext(null);
  const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsLimitPage, setPostsLimitPage] = useState(6);
   const [favorites, setfavorite] = useState([]);
@@ -14,8 +13,8 @@ const PostsContext = createContext(null);
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
   const totalPages =  Math.ceil(totalPosts / postsLimitPage);
+
   const navigate = (value) => setCurrentPage(value);
-  
   const currentPosts = posts.slice(firstPost, lastPost);
   const handleLimitPostsPage = (value) => setPostsLimitPage(value);
   const handleLimitPosts = () => {setPostsLimitPage(postsLimitPage+6)};
@@ -36,13 +35,10 @@ const PostsContext = createContext(null);
     getTotalPosts().then((total)=> setTotalPosts(Number(total)))
   },[]);
 
-  // const getPaginatePage = (value) => {
-  //   return fetcher(`/posts?_limit=6&_page=${value}`)
-  //   .then((page) =>{ 
-  //     setPosts(page)
- 
-  //   });
-  // };
+  const getPaginatePage = (value) => {
+    return fetcher(`/posts?_limit=6&_page=${value}`)
+    .then((page) => console.log(page.data));
+  };
 
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
@@ -55,6 +51,7 @@ const PostsContext = createContext(null);
   }
 
   const value = {
+    getPaginatePage,
     navigate,
     currentPosts,
     postsLimitPage,

@@ -6,8 +6,8 @@ export function PostsUl() {
   
    return(
       <div className="uk-grid  uk-child-width-1-2@m">
-       {currentPosts?.map((post) => {
-        return <PostsItem key={post.id} {...post} />;
+       {currentPosts?.map((post, index) => {
+        return <PostsItem key={index} {...post} />;
         })}
       </div>
    )

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFooter() {
-  const { totalPages, navigate, currentPage, handleLimitPosts } = usePosts();
-  const [isFetching, setIsFetching] = useState(false);
+  const { totalPages, navigate, currentPage, handleLimitPosts, getPaginatePage } = usePosts();
+  const [isSpinner, setIsSpinner] = useState(false);
 
   const pageNumbers = []
   for (let i = 1; i <= totalPages; i++) {
@@ -14,9 +14,12 @@ export function SectionFooter() {
     <>
     <div className="uk-margin">
     <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-     onClick={ handleLimitPosts }>
+     onClick={ ()=>{
+      setIsSpinner(true);
+      handleLimitPosts()}} 
+    onBlur={(e) => { setIsSpinner(false)}}>
       Load more{" "}
-     {isFetching &&  <div className="uk-margin-small-left"
+     {isSpinner && <div className="uk-margin-small-left"
         uk-spinner="ratio: 0.6"></div>}
     </button>
     </div>
@@ -29,8 +32,13 @@ export function SectionFooter() {
         {pageNumbers.map((numPage) => (
       <li key={ numPage } 
         className={(numPage === currentPage) ? "uk-active" : ""} 
-        onClick={() => {navigate(numPage)}}>
-        {(numPage === currentPage) ? <span > { numPage } </span> : <a href="#"> 
+        onClick={() => {
+          navigate(numPage)
+          getPaginatePage(numPage)
+          }}>
+        {(numPage === currentPage) ? 
+        <span > { numPage } </span> :
+         <a href="#"> 
         { numPage } </a>}
       </li>))}
       <li>

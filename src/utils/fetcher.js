@@ -18,8 +18,7 @@ const fetcher = async (pathname, options = {}) => {
    if(total) meta.total = total;
 
    const data = await response.json();
-
-  return { data, meta }
+   return { data, meta }
 
   } catch (error) {
     throw error;
