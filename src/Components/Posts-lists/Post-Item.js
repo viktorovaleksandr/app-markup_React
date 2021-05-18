@@ -27,7 +27,7 @@ export function PostsItem({title, body, id}) {
             </a>
           </div>
         </div>
-      </div>
+       </div>
     </div>
    )
 }

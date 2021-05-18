@@ -13,16 +13,17 @@ const fetcher = async (pathname, options = {}) => {
      ...options
    });
 
-   const meta = {}
-   const total = response.headers.get("X-Total-Count");
-   if(total) meta.total = total;
+  //  const meta = {}
+  //  const total = response.headers.get("X-Total-Count");
+  //  if(total) meta.total = total;
 
-   const data = await response.json();
+  //  const data = await response.json();
 
-  return {
-    data,
-    meta
-  }
+  // return {
+  //   data,
+  //   meta
+  // }
+  return await response.json();
 
   } catch (error) {
     throw error;

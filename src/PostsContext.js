@@ -1,19 +1,20 @@
 import { useState, createContext, useEffect, useContext } from 'react';
 import { getPosts, getTotalPosts } from "./api/index";
 import fetcher from "./utils/fetcher";
- const PostsContext = createContext(null);
+const PostsContext = createContext(null);
 
  const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  const [totalPosts, setTotalPosts] = useState(0);
+  // const [totalPosts, setTotalPosts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsLimitPage, setPostsLimitPage] = useState(6);
   const [favorites, setfavorite] = useState([]);
 
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
-  const totalPages = Math.ceil(totalPosts / postsLimitPage);
-
+  const totalPages =  Math.ceil(posts.length / postsLimitPage);
+  const navigate = (value) => setCurrentPage(value);
+  
   const currentPosts = posts.slice(firstPost, lastPost);
   const handleLimitPostsPage = (value) => setPostsLimitPage(value);
   const handleLimitPosts = () => {setPostsLimitPage(postsLimitPage+6)};
@@ -30,14 +31,16 @@ import fetcher from "./utils/fetcher";
   }
 
   useEffect(() => {
-    getPosts().then((posts) => setPosts(posts.data));
-    getTotalPosts().then((tolal) => setTotalPosts(Number(tolal)));
+    getPosts().then((posts) => setPosts(posts));
   },[]);
 
-  const getPaginatePage = (value) => {
-    return fetcher(`/posts?_limit=6&_page=${value}`)
-    .then((page) => setPosts(page.data));
-  };
+  // const getPaginatePage = (value) => {
+  //   return fetcher(`/posts?_limit=6&_page=${value}`)
+  //   .then((page) =>{ 
+  //     setPosts(page)
+ 
+  //   });
+  // };
 
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
@@ -50,10 +53,10 @@ import fetcher from "./utils/fetcher";
   }
 
   const value = {
+    navigate,
     currentPosts,
     postsLimitPage,
     totalPages,
-    getPaginatePage,
     currentPage,
     getSortPosts,
     getSearchPosts,
