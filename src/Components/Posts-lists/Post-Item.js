@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function PostsItem({title, body, id}) {
@@ -7,7 +7,8 @@ export function PostsItem({title, body, id}) {
    return(
       <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 500">
       <div
-        className=" uk-card uk-card-default uk-margin-medium-bottom uk-child-width-1-2@s uk-grid-collapse uk-margin"
+        className=" uk-card uk-card-default uk-margin-medium-bottom uk-child-width-1-2@s 
+        uk-grid-collapse uk-margin"
         uk-grid="true">
         <div className="uk-card-media-left uk-cover-container">
           <img src="https://picsum.photos/600/400" alt="" uk-cover="true"/>

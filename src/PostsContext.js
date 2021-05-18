@@ -1,17 +1,18 @@
 import { useState, createContext, useEffect, useContext } from 'react';
+import { getPosts, getTotalPosts } from "./api/index";
 import fetcher from "./utils/fetcher";
-
  const PostsContext = createContext(null);
 
  const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsLimitPage, setPostsLimitPage] = useState(6);
   const [favorites, setfavorite] = useState([]);
 
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
-  const totalPages = Math.ceil(posts.length / postsLimitPage);
+  const totalPages = Math.ceil(totalPosts / postsLimitPage);
 
   const currentPosts = posts.slice(firstPost, lastPost);
   const handleLimitPostsPage = (value) => setPostsLimitPage(value);
@@ -30,18 +31,18 @@ import fetcher from "./utils/fetcher";
   }
 
   useEffect(() => {
-    fetcher("/posts").then((data) => setPosts(data));
+    getPosts().then((posts) => setPosts(posts.data));
+    getTotalPosts().then((tolal) => setTotalPosts(Number(tolal)));
   },[]);
- 
-  
+
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
-    .then((data) => setPosts(data));
+    .then((posts) => setPosts(posts));
   }
  
   const getSortPosts = (value) => {
     return fetcher(`/posts?_sort=id&_order=${value}`)
-    .then((data) => setPosts(data));
+    .then((posts) => setPosts(posts));
   }
 
   const value = {
