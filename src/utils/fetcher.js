@@ -12,8 +12,11 @@ const fetcher = async (pathname, options = {}) => {
      },
      ...options
    });
+    const meta = {}
 
-   const meta = {}
+   const numPage = pathname.match(/[0-9]+(?!.*[0-9])/); 
+   if(numPage) meta.numPage = numPage[0];
+
    const total = response.headers.get("X-Total-Count");
    if(total) meta.total = total;
 

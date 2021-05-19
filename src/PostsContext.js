@@ -13,11 +13,10 @@ const PostsContext = createContext(null);
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
   const totalPages =  Math.ceil(totalPosts / postsLimitPage);
-
-  const navigate = (value) => setCurrentPage(value);
+  
   const currentPosts = posts.slice(firstPost, lastPost);
   const handleLimitPostsPage = (value) => setPostsLimitPage(value);
-  const handleLimitPosts = () => {setPostsLimitPage(postsLimitPage+6)};
+  const handleLimitPosts = () => setPostsLimitPage(postsLimitPage+6);
 
   const getIdFavoritePost = (id) => {
    const newFavorites = posts.filter(function(post) { 
@@ -37,12 +36,17 @@ const PostsContext = createContext(null);
 
   const getPaginatePage = (value) => {
     return fetcher(`/posts?_limit=6&_page=${value}`)
-    .then((page) => console.log(page.data));
+    .then(({data, meta}) => {
+      setCurrentPage(meta.numPage)
+    });
   };
 
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
-    .then((posts) => setPosts(posts.data));
+    .then((posts) => {
+      setPosts(posts.data);
+      setTotalPosts(posts.data.length);
+    });
   }
  
   const getSortPosts = (value) => {
@@ -52,7 +56,6 @@ const PostsContext = createContext(null);
 
   const value = {
     getPaginatePage,
-    navigate,
     currentPosts,
     postsLimitPage,
     totalPages,

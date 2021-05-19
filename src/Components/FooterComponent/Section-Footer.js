@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFooter() {
-  const { totalPages, navigate, currentPage, handleLimitPosts, getPaginatePage } = usePosts();
+  const { totalPages, currentPage, handleLimitPosts, getPaginatePage } = usePosts();
   const [isSpinner, setIsSpinner] = useState(false);
 
   const pageNumbers = []
@@ -32,10 +32,7 @@ export function SectionFooter() {
         {pageNumbers.map((numPage) => (
       <li key={ numPage } 
         className={(numPage === currentPage) ? "uk-active" : ""} 
-        onClick={() => {
-          navigate(numPage)
-          getPaginatePage(numPage)
-          }}>
+        onClick={() => { getPaginatePage(numPage)}}>
         {(numPage === currentPage) ? 
         <span > { numPage } </span> :
          <a href="#"> 
