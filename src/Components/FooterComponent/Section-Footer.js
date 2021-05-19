@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFooter() {
-  const { totalPages, currentPage, handleLimitPosts, getPaginatePage } = usePosts();
+  const { totalPages, currentPage, getLimitPosts, getPaginatePage } = usePosts();
   const [isSpinner, setIsSpinner] = useState(false);
 
   const pageNumbers = []
@@ -16,7 +16,7 @@ export function SectionFooter() {
     <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
      onClick={ ()=>{
       setIsSpinner(true);
-      handleLimitPosts()}} 
+      getLimitPosts()}} 
     onBlur={(e) => { setIsSpinner(false)}}>
       Load more{" "}
      {isSpinner && <div className="uk-margin-small-left"

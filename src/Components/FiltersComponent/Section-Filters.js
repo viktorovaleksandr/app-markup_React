@@ -3,7 +3,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFilters() {
-  const { getSortPosts, getSearchPosts, handleLimitPostsPage } = usePosts();
+  const { getSortPosts, getSearchPosts, getLimitPage } = usePosts();
   const [inputValue, setInputValue] = useState('');
   const [isSpinner, setIsSpinner] = useState(false);
 
@@ -33,7 +33,7 @@ export function SectionFilters() {
               <option value="desc">DESC</option>
             </select>
             <select className="uk-select uk-width-small uk-margin-left"
-            onChange={(e)=> handleLimitPostsPage(e.target.value)}>
+            onChange={(e)=> getLimitPage(e.target.value)}>
               <option value="6">6</option>
               <option value="12">12</option>
               <option value="24">24</option>
