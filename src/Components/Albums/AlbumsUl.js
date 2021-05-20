@@ -1,4 +1,4 @@
-import { AlbumsItem } from "./Albums-item";
+import { AlbumsItem } from "./AlbumsItem";
 import { usePosts } from "../../PostsContext";
 
 export function AlbumsUl() {

@@ -1,4 +1,4 @@
-import { PostsItem } from "./Post-Item";
+import { PostsItem } from "./PostsItem";
 import { usePosts } from "../../PostsContext";
 
 export function PostsUl() {

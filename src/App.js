@@ -5,8 +5,8 @@ Uikit.use(Icons);
 
 import { BrowserRouter, Route } from "react-router-dom";
 import { PostsProvider } from "./PostsContext";
-import { PostsLists } from "./Components/Posts-lists/Posts-lists";
-import { PostsGrid } from "./Components/Posts-grid/Posts-grid";
+import { PostsLists } from "./Components/PostsLists/PostsLists";
+import { PostsGrid } from "./Components/PostsGrid/PostsGrid";
 import { Albums } from "./Components/Albums/Albums";
 import { Posts } from "./Components/Posts/Posts";
 import { Post } from "./Components/Post/Post";

@@ -1,32 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePosts } from "../../PostsContext";
 
 export function SectionFilters() {
   const { getSortPosts, getSearchPosts, getLimitPage } = usePosts();
   const [inputValue, setInputValue] = useState('');
-  const [isSpinner, setIsSpinner] = useState(false);
 
-  const debounced = useDebouncedCallback(
-    (inputValue) => {
-      setIsSpinner(true);
-      setInputValue(inputValue);
-      getSearchPosts(inputValue);
-    },500);
+  const debounced = useDebouncedCallback(()=>getSearchPosts(inputValue),500);
+  useEffect(() => debounced(),[inputValue]);
 
    return (
       <div className="uk-margin-medium-bottom uk-flex">
           <form className="uk-search uk-search-default uk-width-medium uk-margin-remove uk-margin-right">
             <span uk-search-icon="true"></span>
-              {isSpinner && <span
-                className="uk-search-icon uk-search-icon-flip"
-                uk-spinner="ratio: 0.6"
-              ></span>}
+              {inputValue && <span
+               className="uk-search-icon uk-search-icon-flip"
+                uk-spinner="ratio: 0.6"></span>}  
               <input className="uk-search-input" type="search" placeholder="Search..."
                 value={inputValue}
-               onChange={(e) => debounced(e.target.value)}
-               onBlur={(e) => { setIsSpinner(false)}}/>
-            </form>
+                onChange={(e) => setInputValue(e.target.value)}/>
+            </form> 
             <select className="uk-select uk-width-small uk-margin-auto-left"
             onChange={(e)=> getSortPosts(e.target.value)}>
               <option value="asc">ASC</option>
@@ -40,12 +33,17 @@ export function SectionFilters() {
             </select>
             <div className="uk-button-group uk-margin-left">
               <button className="uk-button uk-button-default">
-              <a href="Posts-grid" uk-icon="icon:  grid"></a>
+                <span uk-icon="icon: grid"
+                  // onClick={()=>window.location.href='/Posts-grid'}
+                  >
+                </span>
               </button>
               <button className="uk-button uk-button-default">
-                <a href="/" uk-icon="icon:  list"></a>
+                  <span  uk-icon="icon: list"
+                  //  onClick={()=>window.location.href='/'}
+                   >
+                  </span>
               </button>
-         </div>
-      </div>
-   )
+          </div>
+      </div> )
 }

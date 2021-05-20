@@ -1,4 +1,4 @@
-import { SectionHeader } from "../HeaderComponent/Section-Header";
+import { SectionHeader } from "../HeaderComponent/SectionHeader";
 
 export function Post() {
   return (

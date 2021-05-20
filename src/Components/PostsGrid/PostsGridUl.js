@@ -1,4 +1,4 @@
-import {PostsGridItem} from "./PostsGrid-item";
+import {PostsGridItem} from "./PostsGridItem";
 import { usePosts } from "../../PostsContext";
 
 export function PostsGridUl() {

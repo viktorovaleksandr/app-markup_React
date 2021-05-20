@@ -1,7 +1,7 @@
-import { SectionHeader } from "../HeaderComponent/Section-Header";
-import { SectionFilters } from "../FiltersComponent/Section-Filters";
-import { PostsGridUl } from "./PostsGrid-ul";
-import { SectionFooter } from "../FooterComponent/Section-Footer"
+import { SectionHeader } from "../HeaderComponent/SectionHeader";
+import { SectionFilters } from "../FiltersComponent/SectionFilters";
+import { PostsGridUl } from "./PostsGridUl";
+import { SectionFooter } from "../FooterComponent/SectionFooter"
 
 export function PostsGrid() {
   return (
