@@ -3,8 +3,18 @@ import { useState, useEffect } from 'react';
 import { usePosts } from "../../PostsContext";
 
 function SectionFooter() {
-  const { totalPages, currentPage, getLimitPosts, getPaginatePage } = usePosts();
+  const { 
+  totalPages, 
+  currentPage, 
+  getLimitPosts, 
+  getPaginatePage, 
+  spinerValue, 
+  currentPosts 
+} = usePosts();
   
+  const [spinValue, setSpinValue] = useState(false);
+  useEffect(() => setSpinValue(spinerValue),[currentPosts]);
+
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -14,10 +24,11 @@ function SectionFooter() {
     <div className="uk-margin">
     <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
      onClick={()=> {
-       getLimitPosts()
+      setSpinValue(true);
+       getLimitPosts();
        }}>
       Load more{" "}
-     { <div className="uk-margin-small-left"
+     {spinValue && <div className="uk-margin-small-left"
       uk-spinner="ratio: 0.6"></div>}
     </button>
     </div>
@@ -50,6 +61,8 @@ function SectionFooter() {
 }
 
 SectionFooter.propTypes = {
+  currentPosts: PropTypes.array,
+  spinerValue: PropTypes.bool,
   currentPage: PropTypes.number,
   totalPages: PropTypes.number,
   getLimitPosts: PropTypes.func,

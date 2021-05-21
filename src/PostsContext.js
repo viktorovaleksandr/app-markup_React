@@ -7,7 +7,9 @@ const PostsContext = createContext(null);
   const [posts, setPosts] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [postsLimitPage, setPostsLimitPage] = useState(6);
+  const [spinerValue, setSpinerValue] = useState();
 
   const lastPost = currentPage * postsLimitPage;
   const firstPost = lastPost - postsLimitPage;
@@ -24,14 +26,20 @@ const PostsContext = createContext(null);
     .then((posts) => {
       setPostsLimitPage(postsLimitPage+6);
       setPosts(posts.data);
+      setSpinerValue(false);
     });
   };
+
+  const getSortPosts = (value) => {
+    return fetcher(`/posts?_sort=id&_order=${value}`)
+    .then((posts) => setPosts(posts.data));
+  }
 
   const getLimitPage = (value) => {
     return fetcher(`/posts?_start=0&_end=${value}`)
     .then(({ data }) => {
+      setPostsLimitPage(Number(value) + postsLimitPage);
       setPosts(data);
-      setPostsLimitPage(postsLimitPage+value);
     });
   };
 
@@ -47,15 +55,12 @@ const PostsContext = createContext(null);
     .then(({ data }) => {
       setPosts(data);
       setTotalPosts(data.length);
+      setSpinerValue(false);
     });
-  }
- 
-  const getSortPosts = (value) => {
-    return fetcher(`/posts?_sort=id&_order=${value}`)
-    .then((posts) => setPosts(posts.data));
   }
 
   const value = {
+    spinerValue,
     getPaginatePage,
     currentPosts,
     postsLimitPage,
