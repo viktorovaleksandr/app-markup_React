@@ -14,21 +14,6 @@ const PostsContext = createContext(null);
   const totalPages =  Math.ceil(totalPosts / postsLimitPage);
   const currentPosts = posts.slice(firstPost, lastPost);
 
-  // ================================================
-  const [favorites, setFavorite] = useState([]);
-
-  const getIdFavoritePost = (id) => {
-   const newFavorites = posts.filter(function(post) { 
-     return post.id == id 
-    })[0];
-   setFavorite(favorites => [newFavorites,...favorites]);
-  };
-
-  const deleteFavoritePost = (id) => {
-    setFavorite(favorites => favorites.filter(post => post.id !== id));
-  }
-  // ================================================
-
   useEffect(() => {
     getPosts().then((posts) => setPosts(posts.data));
     getTotalPosts().then((total)=> setTotalPosts(Number(total)))
@@ -51,19 +36,17 @@ const PostsContext = createContext(null);
   };
 
   const getPaginatePage = (value) => {
-    if (value && value < totalPosts) {
-        return fetcher(`/posts?_limit=6&_page=${value}`)
-          .then(({ meta }) => {
-          setCurrentPage(meta.numPage);
-      });
-    }
+    return fetcher(`/posts?_limit=6&_page=${value}`)
+      .then(({ meta }) => {
+      setCurrentPage(Number(meta.numPage));
+    });
   };
 
   const getSearchPosts = (value)=> {
     return fetcher(`/posts?title_like=${value}`)
-    .then((posts) => {
-      setPosts(posts.data);
-      setTotalPosts(posts.data.length);
+    .then(({ data }) => {
+      setPosts(data);
+      setTotalPosts(data.length);
     });
   }
  
@@ -82,9 +65,6 @@ const PostsContext = createContext(null);
     getSearchPosts,
     getLimitPage,
     getLimitPosts,
-    getIdFavoritePost,
-    favorites,
-    deleteFavoritePost
   }
 
    return (

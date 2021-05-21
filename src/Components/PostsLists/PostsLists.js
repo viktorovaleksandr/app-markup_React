@@ -1,7 +1,7 @@
 import { SectionHeader } from "../HeaderComponent/SectionHeader";
-import { SectionFilters } from "../FiltersComponent/SectionFilters";
+import SectionFilters from "../FiltersComponent/SectionFilters";
 import { PostsUl } from "./PostsUl";
-import { SectionFooter } from "../FooterComponent/SectionFooter";
+import SectionFooter  from "../FooterComponent/SectionFooter";
 
 export function PostsLists() {
   return (

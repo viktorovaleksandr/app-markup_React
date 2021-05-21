@@ -1,8 +1,9 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePosts } from "../../PostsContext";
 
-export function SectionFilters() {
+function SectionFilters() {
   const { getSortPosts, getSearchPosts, getLimitPage } = usePosts();
   const [inputValue, setInputValue] = useState('');
 
@@ -34,16 +35,22 @@ export function SectionFilters() {
             <div className="uk-button-group uk-margin-left">
               <button className="uk-button uk-button-default">
                 <span uk-icon="icon: grid"
-                  // onClick={()=>window.location.href='/Posts-grid'}
-                  >
+                  onClick={()=>window.location.href='/Posts-grid'}>
                 </span>
               </button>
               <button className="uk-button uk-button-default">
                   <span  uk-icon="icon: list"
-                  //  onClick={()=>window.location.href='/'}
-                   >
+                   onClick={()=>window.location.href='/Posts-lists'}>
                   </span>
               </button>
           </div>
       </div> )
 }
+
+SectionFilters.propTypes = {
+  getLimitPage:PropTypes.func,
+  getSortPosts: PropTypes.func,
+  getSearchPosts: PropTypes.func
+}
+
+export default SectionFilters;

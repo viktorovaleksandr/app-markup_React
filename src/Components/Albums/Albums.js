@@ -1,6 +1,6 @@
 import { SectionHeader } from "../HeaderComponent/SectionHeader";
 import { AlbumsUl } from "./AlbumsUl";
-import { SectionFooter } from "../FooterComponent/SectionFooter";
+import SectionFooter from "../FooterComponent/SectionFooter";
 
 export function Albums() {
   return (

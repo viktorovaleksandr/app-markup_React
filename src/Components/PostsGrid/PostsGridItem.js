@@ -11,7 +11,7 @@ export function PostsGridItem({ title, body, id}) {
             <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
               {title}
               <a href="#" id={id} className="uk-icon-link uk-text-danger" uk-icon="heart"
-             onClick={(e) => getIdFavoritePost(e.currentTarget.id)}
+            //  onClick={(e) => getIdFavoritePost(e.currentTarget.id)}
             ></a>
             </h3>
           </div>

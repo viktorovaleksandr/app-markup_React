@@ -3,7 +3,7 @@ import { usePosts } from "../../PostsContext";
 
 export function SectionHeader () {
   const { favorites, deleteFavoritePost } = usePosts();
- 
+
    return(
       <nav className="uk-navbar uk-navbar-container" uk-navbar="true">
         <div className="uk-navbar-left">
@@ -34,7 +34,7 @@ export function SectionHeader () {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {favorites?.map((post) => {
+                      {favorites?.map((post) => {
                         return (
                         <tr key={post}>
                           <td>Title {post}: {post}</td>
@@ -44,7 +44,7 @@ export function SectionHeader () {
                             ></button>
                           </td>
                         </tr>)
-                      })} */}
+                      })}
                     </tbody>
                   </table>
                 </div>

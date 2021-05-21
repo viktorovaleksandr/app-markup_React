@@ -16,6 +16,7 @@ export default function App() {
     <PostsProvider>
       <BrowserRouter>
         <Route exact path="/" component={PostsLists} />
+        <Route exact path="/Posts-lists" component={PostsLists} />
         <Route exact path="/Posts-grid" component={PostsGrid} />
         <Route exact path="/Albums" component={Albums} />
         <Route exact path="/Posts" component={Posts} />
