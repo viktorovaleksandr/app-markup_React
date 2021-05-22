@@ -1,7 +1,8 @@
-import PropTypes from "prop-types";
+import { FiltrGridListComponent } from "../FiltrGridListComponent/FiltrGridListComponent";
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePosts } from "../../PostsContext";
+import PropTypes from "prop-types";
 
 function SectionFilters() {
   const { 
@@ -44,19 +45,8 @@ function SectionFilters() {
               <option value="12">12</option>
               <option value="24">24</option>
             </select>
-            <div className="uk-button-group uk-margin-left">
-              <button className="uk-button uk-button-default">
-                <span uk-icon="icon: grid"
-                  onClick={()=>window.location.href='/Posts-grid'}>
-                </span>
-              </button>
-              <button className="uk-button uk-button-default">
-                  <span  uk-icon="icon: list"
-                   onClick={()=>window.location.href='/Posts-lists'}>
-                  </span>
-              </button>
-          </div>
-      </div> )
+            <FiltrGridListComponent/>
+    </div> )
 }
 
 SectionFilters.propTypes = {

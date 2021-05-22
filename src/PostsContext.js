@@ -3,11 +3,10 @@ import { getPosts, getTotalPosts } from "./api/index";
 import fetcher from "./utils/fetcher";
 const PostsContext = createContext(null);
 
- const PostsProvider = ({ children }) => {
+const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-
   const [postsLimitPage, setPostsLimitPage] = useState(6);
   const [spinerValue, setSpinerValue] = useState();
 
@@ -58,6 +57,7 @@ const PostsContext = createContext(null);
       setSpinerValue(false);
     });
   }
+  
 
   const value = {
     spinerValue,
@@ -73,12 +73,12 @@ const PostsContext = createContext(null);
   }
 
    return (
-      <PostsContext.Provider value={ value }>
-        {children}
-      </PostsContext.Provider>
-    );
+    <PostsContext.Provider value={ value }>
+      {children}
+    </PostsContext.Provider>
+  );
 
- };
+};
 
 const usePosts = () => useContext(PostsContext);
 export { PostsContext, PostsProvider, usePosts}

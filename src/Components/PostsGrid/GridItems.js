@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { usePosts } from "../../PostsContext";
 
-export function PostsGridItem({ title, body, id}) {
+export function GridItems({ title, body, id}) {
   const { getIdFavoritePost } = usePosts();
 
    return(
@@ -10,9 +10,7 @@ export function PostsGridItem({ title, body, id}) {
           <div className="uk-card-header">
             <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
               {title}
-              <a href="#" id={id} className="uk-icon-link uk-text-danger" uk-icon="heart"
-            //  onClick={(e) => getIdFavoritePost(e.currentTarget.id)}
-            ></a>
+              <a href="#" id={id} className="uk-icon-link uk-text-danger" uk-icon="heart"></a>
             </h3>
           </div>
           <div className="uk-card-body">

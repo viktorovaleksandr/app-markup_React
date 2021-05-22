@@ -1,6 +1,6 @@
 import { SectionHeader } from "../HeaderComponent/SectionHeader";
 import SectionFilters from "../FiltersComponent/SectionFilters";
-import { PostsUl } from "./PostsUl";
+import { ContainerComponent } from "../ContainerComponent/ContainerComponent";
 import SectionFooter  from "../FooterComponent/SectionFooter";
 
 export function PostsLists() {
@@ -10,7 +10,7 @@ export function PostsLists() {
       <div className="uk-section">
         <div className="uk-container">
           <SectionFilters/>
-          <PostsUl/>
+          <ContainerComponent/>
           <SectionFooter/>
         </div>
       </div>

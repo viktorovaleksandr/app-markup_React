@@ -1,6 +1,6 @@
 import { SectionHeader } from "../HeaderComponent/SectionHeader";
 import SectionFilters from "../FiltersComponent/SectionFilters";
-import { PostsGridUl } from "./PostsGridUl";
+import { GridContainer } from "./GridContainer";
 import SectionFooter from "../FooterComponent/SectionFooter"
 
 export function PostsGrid() {
@@ -10,8 +10,8 @@ export function PostsGrid() {
       <div className="uk-section">
         <div className="uk-container">
           <SectionFilters/>
-          <PostsGridUl/>
-         <SectionFooter/>
+          <GridContainer/>
+          <SectionFooter/>
         </div>
       </div>
     </main>
