@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect, useContext } from 'react';
-import { getPosts, getTotalPosts } from "./api/index";
+import { getPosts, getTotalPosts, patchFavoritePostsRequest } from "./api/index";
 import fetcher from "./utils/fetcher";
 const PostsContext = createContext(null);
 
@@ -58,8 +58,34 @@ const PostsProvider = ({ children }) => {
     });
   }
   
+  // ==========================
+  useEffect((favorite) => {
+    if (favorite !== favorite) {
+      patchFavoritePostsRequest(id);
+    }
+  }, []);
 
+  const toggleFavorite = (id) => {
+    const favoritePost = posts?.map((post) => {
+      if (post.id === id && post.favorite === undefined) {
+        post.favorite = true;
+        patchFavoritePostsRequest(id, post.favorite)
+      } else if (post.id === id && post.favorite === false) {
+        post.favorite = true;
+        patchFavoritePostsRequest(id, post.favorite)
+      } else if (post.id === id && post.favorite === true) {
+        post.favorite = false;
+        patchFavoritePostsRequest(id, post.favorite)
+      }
+      return post;
+    })
+    setPosts(favoritePost);
+  }
+ // ==========================
+ 
   const value = {
+    posts,
+    toggleFavorite,
     spinerValue,
     getPaginatePage,
     currentPosts,

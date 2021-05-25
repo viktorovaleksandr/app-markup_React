@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
-export function ItemsComponent({title, body, id}) {
-  const { getIdFavoritePost } = usePosts();
+export function ItemsComponent({title, body, id, favorite}) {
+  const { toggleFavorite } = usePosts();
 
    return(
       <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 500">
@@ -15,7 +15,17 @@ export function ItemsComponent({title, body, id}) {
           <div className="uk-card-body">
             <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between uk-text-success">
              {`Title ${id}:`} { title }
-            <a href="#" id={id} className="uk-icon-link uk-text-danger uk-width-small" uk-icon="heart"></a>
+            <a href="#" id={id} 
+            className={
+            favorite===true?
+            "uk-icon-link uk-text-danger uk-width-small":
+            "uk-icon-link uk-width-small"}
+            uk-icon="heart"
+            onClick={(e)=> {
+              e.preventDefault();
+              toggleFavorite(id)
+            }}
+            ></a>
             </h3>
             <p>{ body }</p>
             <a href="Post" className="uk-button uk-button-text">
