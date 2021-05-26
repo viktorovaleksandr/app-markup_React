@@ -1,6 +1,10 @@
 import { SectionHeader } from "../HeaderComponent/SectionHeader";
+import { useHistory } from "react-router-dom";
+
 
 export function Post() {
+  const history = useHistory();
+
   return (
     <main className="uk-main">
      <SectionHeader/>
@@ -38,6 +42,12 @@ export function Post() {
               perferendis commodi odio ea vel saepe, numquam reiciendis tenetur
               rerum. Assumenda, quae, eius!
             </p>
+          </div>
+          <div className="uk-margin">
+            <button class="uk-button uk-button-primary" type="submit"
+             onClick={() => history.goBack()}>
+              Back
+            </button>
           </div>
           <hr />
           <h3 className="uk-margin-remove-top">Comments:</h3>

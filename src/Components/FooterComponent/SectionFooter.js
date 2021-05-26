@@ -43,7 +43,10 @@ function SectionFooter() {
         {pageNumbers.map((numPage) => (
       <li key={ numPage } 
         className={(numPage === currentPage) ? "uk-active" : ""} 
-        onClick={() => getPaginatePage(numPage)}>
+        onClick={(e) => {
+          e.preventDefault();
+          getPaginatePage(numPage);
+          }}>
         {(numPage === currentPage) ? 
         <span className="uk-text-danger">{ numPage }</span> :
         <a href="#">{ numPage }</a>}

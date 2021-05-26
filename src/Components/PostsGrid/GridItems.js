@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function GridItems({ title, body, id, favorite}) {
