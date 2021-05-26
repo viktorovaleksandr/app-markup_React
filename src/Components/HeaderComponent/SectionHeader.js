@@ -1,16 +1,10 @@
-import { useState } from 'react';
 import { usePosts } from "../../PostsContext";
 
 export function SectionHeader () {
-  const { toggleFavorite, posts } = usePosts();
+  const { handleFavoritePost, currentPosts } = usePosts();
+  const favoritePosts = currentPosts.filter((post) => post.favorite);
 
-  const favoritePosts = posts.filter((post) => {
-    if (post.favorite === true) {
-      return post.favorite;
-    }
-  })
-
-   return(
+   return (
       <nav className="uk-navbar uk-navbar-container" uk-navbar="true">
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
@@ -24,9 +18,7 @@ export function SectionHeader () {
         </div>
         <div className="uk-navbar-right">
           <div className="uk-navbar-item">
-            <button
-              className="uk-button uk-text-danger"
-              type="button"
+            <button className="uk-button "type="button"
               uk-icon="icon: heart; ratio: 2">
             </button>
             <div className="uk-width-large" uk-dropdown="mode: click">
@@ -43,11 +35,11 @@ export function SectionHeader () {
                       {favoritePosts?.map((post) => {
                         return (
                         <tr key={post.id}>
-                          <td>Title: {post.title} </td>
+                          <td>Title: {post.title.slice(0,40)} </td>
                             <td className="uk-text-right">
                             <button 
                             className="uk-button" type="button" uk-icon="icon: close;"
-                            onClick={() => toggleFavorite(post.id)}
+                            onClick={() => handleFavoritePost(post.id)}
                             ></button>
                           </td>
                         </tr>)

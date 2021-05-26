@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect, useContext } from 'react';
-import { getPosts, getTotalPosts, patchFavoritePostsRequest } from "./api/index";
+import { getPosts, getTotalPosts, getFavoritePosts } from "./api/index";
 import fetcher from "./utils/fetcher";
 const PostsContext = createContext(null);
 
@@ -15,9 +15,23 @@ const PostsProvider = ({ children }) => {
   const totalPages =  Math.ceil(totalPosts / postsLimitPage);
   const currentPosts = posts.slice(firstPost, lastPost);
 
+  const handleFavoritePost = (id) => {
+    const favoritePost = currentPosts.map((post) => {
+      if (post.favorite === undefined && post.id === id ) {
+          post.favorite = true;
+      } else if (post.favorite === false && post.id === id  ) {
+          post.favorite = true;
+      } else if (post.favorite === true && post.id === id ) {
+          post.favorite = false;
+      }
+      return post;
+    });
+    setPosts(favoritePost);
+  }
+
   useEffect(() => {
     getPosts().then((posts) => setPosts(posts.data));
-    getTotalPosts().then((total)=> setTotalPosts(Number(total)))
+    getTotalPosts().then((total)=> setTotalPosts(Number(total)));
   },[]);
 
   const getLimitPosts = () => {
@@ -57,35 +71,9 @@ const PostsProvider = ({ children }) => {
       setSpinerValue(false);
     });
   }
-  
-  // ==========================
-  useEffect((favorite) => {
-    if (favorite !== favorite) {
-      patchFavoritePostsRequest(id);
-    }
-  }, []);
-
-  const toggleFavorite = (id) => {
-    const favoritePost = posts?.map((post) => {
-      if (post.id === id && post.favorite === undefined) {
-        post.favorite = true;
-        patchFavoritePostsRequest(id, post.favorite)
-      } else if (post.id === id && post.favorite === false) {
-        post.favorite = true;
-        patchFavoritePostsRequest(id, post.favorite)
-      } else if (post.id === id && post.favorite === true) {
-        post.favorite = false;
-        patchFavoritePostsRequest(id, post.favorite)
-      }
-      return post;
-    })
-    setPosts(favoritePost);
-  }
- // ==========================
  
   const value = {
-    posts,
-    toggleFavorite,
+    handleFavoritePost,
     spinerValue,
     getPaginatePage,
     currentPosts,

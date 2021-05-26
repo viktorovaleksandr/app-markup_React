@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import { usePosts } from "../../PostsContext";
 
-export function AlbumsItems({ title, id }) {
-  const { getIdFavoritePost } = usePosts();
+export function AlbumsItems({ title, id, favorite }) {
+  const { handleFavoritePost } = usePosts();
 
    return(
    <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 500">
@@ -13,9 +12,13 @@ export function AlbumsItems({ title, id }) {
         <div className="uk-overlay uk-overlay-primary uk-position-bottom">
           <p>{ title }</p>
         </div>
-        <div className="uk-position-top-right uk-overlay uk-text-danger">
-          <a href="#" id={id} uk-icon="icon: heart; ratio: 2"
-          onClick={(e) => getIdFavoritePost(e.currentTarget.id)}
+        <div className="uk-position-top-right uk-overlay">
+        <a href="#" id={id} uk-icon="icon: heart; ratio: 2"
+        className={favorite === true ? "uk-icon uk-text-danger" : "uk-icon"}
+         onClick={(e)=> {
+          e.preventDefault();
+          handleFavoritePost(id)
+          }}
           ></a>
         </div>
       </div>

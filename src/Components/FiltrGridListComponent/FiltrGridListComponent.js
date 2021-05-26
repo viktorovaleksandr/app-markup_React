@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-export function FiltrGridListComponent() {
-   
-   const history = useHistory();
+export function FiltrGridListComponent() {  
+const history = useHistory();
 
-   function handleClick1() {
-     history.push("/Posts-grid");
-   }
+function handleClick1() {
+   history.push("/Posts-grid");
+}
 
-   function handleClick2() {
-      history.push("/Posts");
-    }
+function handleClick2() {
+   history.push("/Posts-lists");
+}
 
    return (
       <>

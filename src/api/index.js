@@ -8,8 +8,7 @@ const getTotalPosts = async () => {
    return await fetcher("/posts?_limit=0").then(({meta})=> meta.total);
 }
 
-// ===============
-const patchFavoritePostsRequest = async (id, favorite) => {
+const getFavoritePosts = async (id, favorite) => {
   return await fetcher(`/posts/${id}`, {
     method: "PATCH",
     body: JSON.stringify({
@@ -18,4 +17,4 @@ const patchFavoritePostsRequest = async (id, favorite) => {
   });
 };
 
-export { getPosts, getTotalPosts, patchFavoritePostsRequest  };
+export { getPosts, getTotalPosts, getFavoritePosts  };
