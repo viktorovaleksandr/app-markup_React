@@ -1,26 +1,19 @@
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function FiltrGridListComponent() {  
-const history = useHistory();
-
-function handleClick1() {
-   history.push("/Posts-grid");
-}
-
-function handleClick2() {
-   history.push("/Posts-lists");
-}
-
+   const isActive = location.pathname;
    return (
-      <>
       <div className="uk-button-group uk-margin-left">
-         <button className="uk-button uk-button-default" onClick={handleClick1}>
-            <span uk-icon="icon: grid" ></span>
-         </button>
-         <button className="uk-button uk-button-default" onClick={handleClick2}>
-            <span uk-icon="icon: list"></span>
-         </button>
-      </div>
-   </> )
+        <NavLink to="/"
+          activeClassName={isActive === "/Posts-grid" ? "uk-active" : ""}
+          className="uk-button uk-button-default" >
+          <span uk-icon="icon:  grid"></span>
+        </NavLink>
+        <NavLink to="/Posts"
+          activeClassName={isActive === "/Posts-lists" ? "uk-active" : ""}
+          className="uk-button uk-button-default" >
+          <span uk-icon="icon:  list"></span>
+        </NavLink>
+      </div> )
 }
