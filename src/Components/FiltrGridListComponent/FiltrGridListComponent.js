@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { NavLink } from "react-router-dom";
 
-export function FiltrGridListComponent() {  
+export function FiltrGridListComponent() {
    const isActive = location.pathname;
+
    return (
       <div className="uk-button-group uk-margin-left">
         <NavLink to="/"
